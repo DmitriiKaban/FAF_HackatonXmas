@@ -9,13 +9,13 @@ from datetime import timedelta, date
 
 
 time_slots = (
-    ('9:30 - 10:30', '9:30 - 10:30'),
-    ('10:30 - 11:30', '10:30 - 11:30'),
-    ('11:30 - 12:30', '11:30 - 12:30'),
-    ('12:30 - 1:30', '12:30 - 1:30'),
-    ('2:30 - 3:30', '2:30 - 3:30'),
-    ('3:30 - 4:30', '3:30 - 4:30'),
-    ('4:30 - 5:30', '4:30 - 5:30'),
+    ('8:00 - 9:30', '8:00 - 9:30'),
+    ('9:45 - 11:15', '9:45 - 11:15'),
+    ('11:30 - 13:00', '11:30 - 13:00'),
+    ('13:30 - 15:00', '13:30 - 15:00'),
+    ('15:15 - 16:45', '15:15 - 16:45'),
+    ('17:00 - 18:30', '17:00 - 18:30'),
+    ('18:45 - 20:15', '18:45 - 20:15'),
 )
 DAYS_OF_WEEK = (
     ('Monday', 'Monday'),
@@ -43,9 +43,10 @@ class Room(models.Model):
 class Instructor(models.Model):
     uid = models.CharField(max_length=6)
     name = models.CharField(max_length=25)
+    specialization = models.CharField(max_length=25)
 
     def __str__(self):
-        return f'{self.uid} {self.name}'
+        return f'{self.uid} {self.name} {self.specialization}'
 
 
 class MeetingTime(models.Model):
@@ -103,28 +104,6 @@ class Section(models.Model):
         section.instructor = instructor
         section.save()
 
-'''
-class Data(models.Manager):
-    def __init__(self):
-        self._rooms = Room.objects.all()
-        self._meetingTimes = MeetingTime.objects.all()
-        self._instructors = Instructor.objects.all()
-        self._courses = Course.objects.all()
-        self._depts = Department.objects.all()
-
-    def get_rooms(self): return self._rooms
-
-    def get_instructors(self): return self._instructors
-
-    def get_courses(self): return self._courses
-
-    def get_depts(self): return self._depts
-
-    def get_meetingTimes(self): return self._meetingTimes
-
-    def get_numberOfClasses(self): return self._numberOfClasses
-
-'''
 
 
 

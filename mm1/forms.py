@@ -17,7 +17,8 @@ class InstructorForm(ModelForm):
         model = Instructor
         fields = [
             'uid',
-            'name'
+            'name',
+            'specialization'
         ]
 
 

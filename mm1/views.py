@@ -82,11 +82,17 @@ class Schedule:
         return self
 
     def calculate_fitness(self):
+
         self._numberOfConflicts = 0
         classes = self.get_classes()
         for i in range(len(classes)):
             if classes[i].room.seating_capacity < int(classes[i].course.max_numb_students):
                 self._numberOfConflicts += 1
+
+            instructors_for_course = classes[i].course.instructors.all()
+            if classes[i].instructor not in instructors_for_course:
+                self._numberOfConflicts += 1
+
             for j in range(len(classes)):
                 if j >= i:
                     if (classes[i].meeting_time == classes[j].meeting_time) and \
